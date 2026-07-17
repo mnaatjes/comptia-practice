@@ -1,0 +1,32 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+docs/
+*.md
+
+# IDE / Editors
+.vscode/
+.idea/
+*.sw?
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Local environments / Dependencies
+node_modules/
+.venv/
+env/
+venv/
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+.env.*
+
+# Docker
+docker-compose.yml
+.dockerignore
