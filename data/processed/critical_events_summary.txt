@@ -1,0 +1,23 @@
+Parsing data/raw/windows_system_log.evtx for critical errors...
+Found 965 critical/error events.
+
+First identified error:
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event"><System><Provider Name="Microsoft-Windows-TPM-WMI" Guid="{7d5387b0-cbe0-11da-a94d-0800200c9a66}"></Provider>
+<EventID Qualifiers="">1040</EventID>
+<Version>0</Version>
+<Level>2</Level>
+<Task>0</Task>
+<Opcode>0</Opcode>
+<Keywords>0x8000000000000000</Keywords>
+<TimeCreated SystemTime="2025-12-28 21:38:36.370247+00:00"></TimeCreated>
+<EventRecordID>44121</EventRecordID>
+<Correlation ActivityID="" RelatedActivityID=""></Correlation>
+<Execution ProcessID="2732" ThreadID="7376"></Execution>
+<Channel>System</Channel>
+<Computer>DESKTOP-F6NEOBE</Computer>
+<Security UserID="S-1-5-18"></Security>
+</System>
+<EventData><Data Name="Path">C:\WINDOWS\Logs\MeasuredBoot\0000000135-0000000000.json</Data>
+</EventData>
+</Event>
+

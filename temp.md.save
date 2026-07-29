@@ -1,0 +1,58 @@
+Here is the immediate problem visible on this screen: **Your Security Processor (TPM) options are missing the sub-links to actually manage or troubleshoot it.**
+
+On a healthy system, there should be a blue clickable link right below that paragraph labeled **"Security processor details"**. Because that link is completely absent, Windows is successfully detecting the TPM chip at a hardware level (which matches the `TpmPresent: true` from your log), but the Windows Security app cannot interact with its configuration layer due to the missing Endorsement Key certificate.
+
+Additionally, you can see that **Memory integrity is off** under Core isolation, which aligns perfectly with the log's statement that `VirtualSecureMemory` is disabled because the core hardware trust chain is broken.
+
+Since you cannot click into the security processor menu here to clear it, use this alternative method to clear the TPM cache and force the motherboard to re-provision the keys:
+
+### Force-Clear the TPM via PowerShell
+
+1. Right-click the Windows Start menu button and select **Terminal (Admin)** or **PowerShell (Admin)**.
+2. Type or paste the following command and press Enter:
+```powershell
+Clear-Tpm
+
+```
+
+
+3. Restart your computer immediately when prompted.
+
+### If the command fails or doesn't fix the menu:
+
+This confirms the issue is running deeper at the motherboard firmware level, preventing Windows from pulling the cryptographic identity. Your best next steps are:
+
+* **The BIOS Toggle:** Restart your PC, press `Del` or `F2` to enter your BIOS settings. Look for **Advanced / Security** configuration, find **AMD fTPM switch** or **Intel PTT**, turn it completely **Disabled**, save and boot all the way into Windows. Then, restart back into BIOS, turn it to **Enabled**, save, and boot back into Windows. This deep-cycles the firmware container.
+* **Flash the Motherboard BIOS:** If the toggle doesn't restore the missing options link, a clean BIOS update from your motherboard manufacturer's support site will wipe the corrupted NVRAM state and re-initialize the TPM's core attestation handshake.
+
+The PowerShell output confirms the root cause: **`TpmReady: False`** and **`TpmOwned: False`**.
+
+Your AMD fTPM is physically enabled in the CPU, but it is currently in an uninitialized, unowned state because Windows cannot complete auto-provisioning without that missing Endorsement Key certificate. The `RestartPending: True` means the system registered the clear command, but because the chip lacks its base cryptographic identity, a simple reboot rarely fixes this state on its own.
+
+Since this is an **AMD fTPM** (integrated into your Ryzen processor) running firmware version **3.92.0.5**, this specific failure loop under system load is a known issue tied to older AMD AGESA microcode versions. When the CPU hits a heavy load or a sudden power state change, the fTPM communication channel over the SPI/LPC bus drops out, dropping ownership and triggering your system crash.
+
+Here is the exact technical progression to resolve this:
+
+### 1. Perform the Physical Restart
+
+Since the command executed, go ahead and restart the PC now.
+
+* During the reboot, your motherboard firmware might intercept the boot process with a black screen and a prompt asking something like: *"Press Y to reset fTPM or N to keep previous configuration."*
+* **Press Y** (assuming you have your BitLocker recovery key backed up or BitLocker disabled, which the previous screen indicated it likely is).
+
+### 2. Update the Motherboard BIOS (The Direct Fix)
+
+If the reboot leaves `TpmReady` as `False`, you must update your motherboard's BIOS.
+AMD resolved these exact fTPM dropouts and attestation handshake failures in later AGESA firmware updates (specifically AGESA 1.2.0.7 and newer). Your current fTPM version (`3.92.0.5`) indicates older underlying motherboard microcode. Flashing the latest BIOS version for your motherboard will overwrite the corrupted platform keys, update the fTPM firmware layer, and force Windows to successfully claim ownership on the next boot.
+
+### 3. Clear AMD fTPM Keys in the BIOS Hierarchy
+
+If you want to clear the block before flashing a new BIOS:
+
+1. Boot into your BIOS (spam `Del` or `F2` at startup).
+2. Switch to **Advanced Mode** (`F7`).
+3. Navigate to the **Security** or **Advanced\AMD FTPM Configuration** menu.
+4. Look for an option explicitly labeled **"Erase fTPM NVRAM"** or **"Clear fTPM Keys"**. Change it to **Enabled**.
+5. Save changes and exit (`F10`).
+
+Once Windows boots back up with refreshed hardware keys, `AutoProvisioning: Enabled` will automatically take over, switch `TpmReady` back to `True`, and resolve the load-induced attestation crashes.
