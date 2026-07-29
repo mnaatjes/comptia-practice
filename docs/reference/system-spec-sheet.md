@@ -48,6 +48,6 @@ last_updated_at: "2026-07-29"
 
 | Manufacturer | Model | OEM Platform | Warranty | Efficiency | Estimated Price | Notes |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **EVGA** | SuperNOVA 650 G6 | Seasonic | 10 Years | 80+ Gold | ~$110 - $130 | Built on the legendary Seasonic Focus platform. 100% Japanese capacitors. Extremely reliable. |
-| **Seasonic** | Focus GX-650 | Seasonic (In-House) | 10 Years | 80+ Gold | ~$100 - $120 | The industry gold standard for power delivery. Fully modular, whisper-quiet operation. |
-| **MSI** | MPG A650G PCIE5 | CWT (Custom) | 10 Years | 80+ Gold | ~$90 - $110 | Excellent value. Native ATX 3.0 compatible (includes 12VHPWR cable for future RTX 4000 series upgrades). |
+| **Thermaltake** | Toughpower GF1 650W | CWT | 10 Years | 80+ Gold | ~$80 - $90 | Highly rated Tier-A unit built on a robust CWT platform. Excellent ripple suppression for the price. |
+| **MSI** | MAG A650GL | CWT | 7 Years | 80+ Gold | ~$75 - $90 | Budget-friendly while retaining native ATX 3.0 / PCIe 5.0 support. Fully modular. |
+| **Seasonic** | Focus GX-650 | Seasonic (In-House) | 10 Years | 80+ Gold | ~$100 - $110 | Retained on list as the "premium" alternative. The industry gold standard for power delivery and acoustics. |
