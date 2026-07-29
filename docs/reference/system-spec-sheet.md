@@ -44,6 +44,12 @@ last_updated_at: "2026-07-29"
 * **GPU Upgrade Path:** Based on a strict mid-range budget ceiling (~$500 maximum, e.g., RTX 4070 Super or RX 7800 XT), a 650W PSU is definitively sufficient. Modern mid-range architectures are highly power-efficient (the RTX 4070 Super draws ~220W, identical to the older RX 580).
 * **ATX 3.0 Standard:** When purchasing a new PSU, looking for one explicitly labeled as "ATX 3.0 Compatible" ensures it includes the newer `12VHPWR` cable natively. This cable is required by modern Nvidia 4000-series graphics cards, preventing the need for adapter dongles in the future.
 
+## PSU Quality Indicators (Retail Listings)
+When evaluating PSU store listings on Amazon or Newegg, ignore the "80 Plus Gold" badge (which only measures efficiency, not safety) and look for these three legally binding quality indicators:
+* **Warranty Length:** The ultimate indicator of component quality. A 7 to 10-year warranty indicates the manufacturer is financially confident the internal components will not degrade. Avoid 3 to 5-year warranties.
+* **105°C Japanese Capacitors:** Premium manufacturers will explicitly advertise this phrase. Japanese capacitors (e.g., Rubycon, Nippon Chemi-Con) are the industry standard for longevity. If a listing omits this or says "Taiwanese Capacitors," it is a budget platform.
+* **Cybenetics Certification:** An independent, strict testing standard that evaluates both efficiency (ETA) and noise (LAMBDA). It is significantly harder for cheap, predatory power supplies to pass than the older 80 Plus standard.
+
 ## PSU Replacement Candidates (650W)
 
 | Manufacturer | Model | OEM Platform | Warranty | Efficiency | Estimated Price | Notes |
