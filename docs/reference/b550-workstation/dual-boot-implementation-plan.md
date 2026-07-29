@@ -19,33 +19,29 @@ flowchart TD
         direction TB
         
         subgraph OS_Domain["Primary OS Drives (Executable Software)"]
-            M2_1["M.2 Slot 1 (1TB)"]:::win
-            M2_2["M.2 Slot 2 (2TB)"]:::linux
+            M2_1["M.2 Slot 1 (1TB)"]
+            M2_2["M.2 Slot 2 (2TB)"]
         end
 
         subgraph Data_Domain["SATA Storage (Data & Media)"]
-            SATA_1["SATA SSD 1"]:::linux
-            SATA_2["SATA HDD 1"]:::shared
+            SATA_1["SATA SSD 1"]
+            SATA_2["SATA HDD 1"]
         end
     end
 
     %% Operating Systems
-    WinOS["Windows 11 (NTFS)"]:::win
-    LinOS["Debian 13 (EXT4)"]:::linux
+    WinOS["Windows 11 (NTFS)"]
+    LinOS["Debian 13 (EXT4)"]
 
     %% Connections
-    WinOS -->|Boot & C:\ Drive| M2_1
-    LinOS -->|Boot & /home Drive| M2_2
+    WinOS -->|"Boot & Drive C:"| M2_1
+    LinOS -->|"Boot & /home Drive"| M2_2
 
     LinOS -->|Mount: /var/lib/docker| SATA_1
     WinOS -.-x|Hidden via Disk Management| SATA_1
     
-    WinOS -->|Mount: D:\ (Shared Media)| SATA_2
+    WinOS -->|"Mount: Drive D: (Shared Media)"| SATA_2
     LinOS -->|Mount: /mnt/shared (Media)| SATA_2
-
-    classDef win fill:#0078D7,stroke:#fff,color:#fff
-    classDef linux fill:#FCC624,stroke:#333,color:#333
-    classDef shared fill:#2ea043,stroke:#fff,color:#fff
 ```
 
 ## 3. Implementation Checklist
