@@ -8,7 +8,7 @@ last_updated_at: "2026-07-29"
 # B550 Workstation: Dual-Boot Implementation & Architecture Plan
 
 ## 1. Project Objective
-To physically isolate Windows 11 and Linux (Debian) across two dedicated M.2 NVMe drives, providing an uncompromised bare-metal environment for development, sandboxing, and Docker containerization on Linux, while preserving a pristine Windows 11 environment strictly for anti-cheat gaming and locked academic testing.
+To physically isolate Windows 11 and Linux (Mint Edge) across two dedicated M.2 NVMe drives, providing an uncompromised bare-metal environment for development, sandboxing, and Docker containerization on Linux, while preserving a pristine Windows 11 environment strictly for anti-cheat gaming and locked academic testing.
 
 ## 2. Storage & Filesystem Topology
 *(Note: SATA drive assignments are pending physical inventory confirmation).*
@@ -31,7 +31,7 @@ flowchart TD
 
     %% Operating Systems
     WinOS["Windows 11 (NTFS)"]
-    LinOS["Debian 13 (EXT4)"]
+    LinOS["Mint Edge (EXT4)"]
 
     %% Connections
     WinOS -->|"Boot & Drive C"| M2_1
@@ -59,11 +59,11 @@ flowchart TD
 - [ ] Ensure the 2TB M.2 drive remains entirely untouched/unformatted by Windows.
 
 ### Phase 3: Linux Deployment (M.2 #2)
-- [ ] Download Debian 13 "Netinst" ISO.
+- [ ] Download Linux Mint (Edge Edition) ISO.
 - [ ] Flash ISO to USB using Ventoy or BalenaEtcher.
-- [ ] Boot from USB and execute Debian Installer.
+- [ ] Boot from USB and execute Mint Installer.
 - [ ] Target the 2TB M.2 drive for full installation (format as `EXT4` or `BTRFS`).
-- [ ] Verify GRUB bootloader successfully detects both Windows 11 and Debian during POST.
+- [ ] Verify GRUB bootloader successfully detects both Windows 11 and Linux Mint during POST.
 
 ### Phase 4: Storage Allocation & Sandboxing Setup
 - [ ] Inventory exact SATA drive counts and capacities.
