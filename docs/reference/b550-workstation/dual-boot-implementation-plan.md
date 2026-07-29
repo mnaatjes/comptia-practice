@@ -34,14 +34,14 @@ flowchart TD
     LinOS["Debian 13 (EXT4)"]
 
     %% Connections
-    WinOS -->|"Boot & Drive C:"| M2_1
+    WinOS -->|"Boot & Drive C"| M2_1
     LinOS -->|"Boot & /home Drive"| M2_2
 
-    LinOS -->|Mount: /var/lib/docker| SATA_1
-    WinOS -.-x|Hidden via Disk Management| SATA_1
+    LinOS -->|"Mount: /var/lib/docker"| SATA_1
+    WinOS -.-x|"Hidden via Disk Management"| SATA_1
     
-    WinOS -->|"Mount: Drive D: (Shared Media)"| SATA_2
-    LinOS -->|Mount: /mnt/shared (Media)| SATA_2
+    WinOS -->|"Mount: Drive D (Shared Media)"| SATA_2
+    LinOS -->|"Mount: /mnt/shared (Media)"| SATA_2
 ```
 
 ## 3. Implementation Checklist
