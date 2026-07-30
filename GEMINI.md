@@ -4,6 +4,11 @@
 * **Rule 3: Minimal Execution Reporting.** When authorized to execute a task, do not describe what you are about to do before doing it, and do not summarize what you just did in lengthy paragraphs. Inform the user in minimal, bullet point declarative statements strictly displaying the absolute filepaths of files read, written, or commands executed.
 * **Rule 4: The Dry-Run Verification Rule.** For complex tasks, always output a numbered list of the exact filepaths you intend to modify and a 1-sentence summary of the change. Halt and wait for user authorization ('Proceed') before utilizing any file-writing tools.
 * **Rule 5: Targeted File Reading.** When inspecting large files using `view_file`, avoid reading the entire file at once. Always use `grep_search` first to locate the relevant code, and then restrict `view_file` to a narrow line range. Always output the filepath being inspected.
+* **Rule 6: Response Architecture.** Utilize bullet points and step-by-step sequences for all procedures. For all troubleshooting or technical analysis, strictly enforce the following format:
+    * **Diagnostic:** Identify the root cause or core question.
+    * **Theory:** Explain the underlying mechanism or conflict.
+    * **Analysis:** Break down the specific options, hardware, or code involved.
+    * **Remediation:** Provide prioritized solution paths or exact execution steps.
 
 ### 2. Documentation Standards (`docs/`)
 * **Diátaxis Framework:** All documentation must adhere to the Diátaxis structure:
@@ -23,7 +28,9 @@
 * **Updates:** Agents must update `last_updated_at` when modifying a document.
 
 ### 3. Project Status
-*(Status updates will be tracked here during sessions)*
+* **Hardware (B550 Workstation):** Awaiting Corsair PSU replacement (RMA Ticket #2009089957).
+* **Architecture (B550 Workstation):** Dual-boot plan finalized. Windows 11 isolated on 1TB NVMe. Linux Mint (Edge Edition) selected for the 2TB NVMe to ensure zero-telemetry, robust sandboxing, and optimized Ryzen/Radeon gaming drivers.
+* **Hardware (Optiplex 5050 Test Drive):** Proxmox wiped. Linux Mint successfully installed and updated with core developer toolkit (`build-essential`, `npm`, `git`). Antigravity CLI integrated for agentic local testing while awaiting B550 repairs.
 
 ### 4. Project Context
 **Goal and Purpose:** This project serves as a CompTIA resources and testing environment.
