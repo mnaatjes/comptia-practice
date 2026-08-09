@@ -2,7 +2,7 @@
 title: "Windows 11 OS Reinstallation & Hardware Licensing Guide"
 tags: ["windows", "reinstallation", "hardware", "licensing", "dual-boot"]
 created_at: "2026-07-29"
-last_updated_at: "2026-07-29"
+last_updated_at: "2026-08-09"
 ---
 
 # Windows 11 Reinstallation & Licensing Guide
@@ -26,7 +26,16 @@ Before wiping your bloated Windows 11 installation, boot into the current OS one
 3. **Flash the Drive:** Run the `.exe` file. Select "Create installation media (USB flash drive, DVD, or ISO file) for another PC."
 4. **Target the USB:** Select your inserted USB drive. The tool will format the drive, download the pristine OS image directly from Microsoft, and make the drive bootable.
 
-## Phase 3: The Clean Installation & Dual-Boot Architecture
+## Phase 3: M.2 SATA BIOS Configuration & Troubleshooting
+If you are utilizing an M.2 SATA drive for the Windows 11 installation, verify the following UEFI settings before booting the installation media. M.2 SATA drives are natively supported but require strict UEFI compliance for Windows 11.
+
+1. **Enter BIOS:** Restart the computer and tap `DEL` to enter the Gigabyte UEFI BIOS.
+2. **Disable CSM:** Navigate to the **Boot** tab and set **CSM Support** to **Disabled**. This enforces pure UEFI mode.
+3. **Enable Secure Boot:** Locate **Secure Boot** (often under the Boot tab) and ensure it is **Enabled**.
+4. **Verify AHCI Mode:** Navigate to the **Settings** or **Peripherals** tab, locate **SATA Configuration**, and ensure it is set to **AHCI** (default).
+5. **Save & Exit:** Press `F10` to save changes and reboot.
+
+## Phase 4: The Clean Installation & Dual-Boot Architecture
 Your goal is to isolate Windows 11 completely to the 1TB M.2 drive, leaving the 2TB M.2 drive entirely unpartitioned and untouched for a future, physically segregated Linux (Debian) installation.
 
 1. **Boot from USB:** Restart the computer and tap `F12` (Gigabyte Boot Menu) to boot directly from the Windows 11 USB.
@@ -38,7 +47,7 @@ Your goal is to isolate Windows 11 completely to the 1TB M.2 drive, leaving the 
 4. **Installation:** Select that Unallocated Space and click Next. Windows will automatically format the drive and install the OS strictly within the physical boundaries of the 1TB M.2 drive.
 5. **Preserving Linux Space:** Do *not* touch or format the 2TB M.2 drive during this process. Leave it alone so the future Linux installer can claim it natively.
 
-## Phase 4: HWID Activation & Troubleshooting
+## Phase 5: HWID Activation & Troubleshooting
 1. **Automatic HWID Activation:** Once Windows 11 boots to the desktop, connect to the internet. Windows will silently send your motherboard's UUID to the Microsoft Azure activation servers. Microsoft will recognize the hardware fingerprint from your previous installation and automatically activate Windows with a Digital License.
 2. **Troubleshooting Activation Failure:** 
    * If Windows fails to activate automatically after 24 hours, navigate to **Settings > System > Activation**.
