@@ -82,3 +82,40 @@ Once your Vaultwarden server is secured behind HTTPS, you can connect your clien
 5. Change the setting from `bitwarden.com` to your Vaultwarden instance's secure URL (e.g., `https://vault.local:8443` or your public domain if exposed).
 6. Click **Save**.
 7. You may now create a new account from the login screen. This account will be created directly on your local Vaultwarden server, not on Bitwarden's cloud.
+
+---
+
+## 4. Ansible Integration
+
+To automatically inject credentials from Vaultwarden into your Ansible playbooks, you must utilize the official Bitwarden CLI (`bw`) and the community Ansible collection.
+
+### Step 1: Install Prerequisites
+Install the Bitwarden CLI (requires Node.js) and the Ansible community general collection:
+```bash
+npm install -g @bitwarden/cli
+ansible-galaxy collection install community.general
+```
+
+### Step 2: Authenticate the CLI
+Point the CLI to your local Vaultwarden server and log in:
+```bash
+bw config server https://your-vaultwarden-url.com
+bw login
+```
+
+### Step 3: Export the Session Token
+Ansible requires a decrypted session to read passwords non-interactively. Unlock the vault and export the session token to your environment variables before running your playbook:
+```bash
+export BW_SESSION=$(bw unlock --raw)
+```
+
+### Step 4: Playbook Implementation
+Within your Ansible playbook, utilize the `bitwarden` lookup plugin to fetch a secret by its item ID:
+```yaml
+- name: Example Playbook
+  hosts: homelab
+  tasks:
+    - name: Retrieve secret from Vaultwarden
+      ansible.builtin.debug:
+        msg: "The secret password is: {{ lookup('community.general.bitwarden', 'item_id_here', field='password') }}"
+```
